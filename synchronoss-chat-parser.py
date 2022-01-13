@@ -34,6 +34,14 @@ def exitApplication():
     MsgBox = tk.messagebox.askquestion ('Exit Application','Are you sure you want to exit the application',icon = 'warning')
     if MsgBox == 'yes':
        root.destroy()
+
+
+#TODO: create function to format files so that they are in proper JSON format
+#  replace all u'' with ""
+# replace all u' with '
+# replace all ' with "
+def formatFiles():
+    return
      
 exitButton = tk.Button (root, text='       Exit Application     ',command=exitApplication, bg='brown', fg='white', font=('helvetica', 12, 'bold'))
 canvas1.create_window(150, 230, window=exitButton)
