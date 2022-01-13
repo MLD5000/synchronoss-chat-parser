@@ -1,14 +1,21 @@
-{   "attributes": [   {   "name": "c", "value": "-1"},
-                       {   "name": "d", "value": "1"},
-                       {   "name": "g", "value": "0"},
-                       {   "name": "h", "value": "0"}],
-    "body": "This is another test and sanitized message. I love Monolith Forensics",
-    "direction": "in",
-    "id": "1636843008346:c231d072ca4c61c55ab99de9fd553c53",
-    "links": [   {   "href": "http://mm/mm/api/user/623cea0ac4124e08915aea8bbc3fe74f/messages/c231d072ca4c61c55ab99de9fd553c53",
-                      "rel": "self"}],
-    "received": "2021-11-13T22:36:48.346Z",
-    "sender": "mbeers.forensics@gmail.com",
-    "title": "",
-    "type": "sms"}
-
+{
+  "attributes": [
+    { "name": "c", "value": "-1" },
+    { "name": "d", "value": "1" },
+    { "name": "g", "value": "0" },
+    { "name": "h", "value": "0" }
+  ],
+  "body": "This is another test and sanitized message. I love Monolith Forensics",
+  "direction": "in",
+  "id": "1636843008346:c231d072ca4c61c55ab99de9fd553c53",
+  "links": [
+    {
+      "href": "http://mm/mm/api/user/623cea0ac4124e08915aea8bbc3fe74f/messages/c231d072ca4c61c55ab99de9fd553c53",
+      "rel": "self"
+    }
+  ],
+  "received": "2021-11-13T22:36:48.346Z",
+  "sender": "mbeers.forensics@gmail.com",
+  "title": "",
+  "type": "sms"
+}
