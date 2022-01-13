@@ -8,7 +8,7 @@ root= tk.Tk()
 canvas1 = tk.Canvas(root, width = 300, height = 300, bg = 'dark slate gray', relief = 'raised')
 canvas1.pack()
 
-label1 = tk.Label(root, text='JSON to CSV Converter', bg='dark slate gray', fg='white')
+label1 = tk.Label(root, text='Synchronoss Chat Parser', bg='dark slate gray', fg='white')
 label1.config(font=('helvetica', 20))
 canvas1.create_window(150, 60, window=label1)
 
