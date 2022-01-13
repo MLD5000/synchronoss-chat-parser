@@ -1,0 +1,14 @@
+{   u'attributes': [   {   u'name': u'c', u'value': u'-1'},
+                       {   u'name': u'd', u'value': u'1'},
+                       {   u'name': u'g', u'value': u'0'},
+                       {   u'name': u'h', u'value': u'0'}],
+    u'body': u'This is another test and sanitized message. I love Monolith Forensics',
+    u'direction': u'in',
+    u'id': u'1636843008346:c231d072ca4c61c55ab99de9fd553c53',
+    u'links': [   {   u'href': u'http://mm/mm/api/user/623cea0ac4124e08915aea8bbc3fe74f/messages/c231d072ca4c61c55ab99de9fd553c53',
+                      u'rel': u'self'}],
+    u'received': u'2021-11-13T22:36:48.346Z',
+    u'sender': u'mbeers.forensics@gmail.com',
+    u'title': u'',
+    u'type': u'sms'}
+
