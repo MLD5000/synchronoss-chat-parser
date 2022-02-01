@@ -1,49 +1,92 @@
+import json
+from posixpath import split
+import re
 import tkinter as tk
-from tkinter import filedialog
-from tkinter import messagebox
-import pandas as pd
+from tkinter.filedialog import askopenfilename
+import os
+import time
 
-root= tk.Tk()
-
-canvas1 = tk.Canvas(root, width = 300, height = 300, bg = 'dark slate gray', relief = 'raised')
-canvas1.pack()
-
-label1 = tk.Label(root, text='Synchronoss Chat Parser', bg='dark slate gray', fg='white')
-label1.config(font=('helvetica', 20))
-canvas1.create_window(150, 60, window=label1)
-
-def getJSON ():
-    global read_file
-    
-    import_file_path = filedialog.askopenfilename()
-    read_file = pd.read_json (import_file_path)
-    
-browseButton_JSON = tk.Button(text="      Import JSON File     ", command=getJSON, bg='slate gray', fg='white', font=('helvetica', 12, 'bold'))
-canvas1.create_window(150, 130, window=browseButton_JSON)
-
-def convertToCSV ():
-    global read_file
-    
-    export_file_path = filedialog.asksaveasfilename(defaultextension='.csv')
-    read_file.to_csv (export_file_path, index = None, header=True)
-
-saveAsButton_CSV = tk.Button(text='Convert JSON to CSV', command=convertToCSV, bg='slate gray', fg='white', font=('helvetica', 12, 'bold'))
-canvas1.create_window(150, 180, window=saveAsButton_CSV)
-
-def exitApplication():
-    MsgBox = tk.messagebox.askquestion ('Exit Application','Are you sure you want to exit the application',icon = 'warning')
-    if MsgBox == 'yes':
-       root.destroy()
+# Set global variables needed to begin program
+testData = 'test1.json'
+orgText = ''
+newText = ''
 
 
-#TODO: create function to format files so that they are in proper JSON format
-#  replace all u'' with ""
-# replace all u' with '
-# replace all ' with "
-def formatFiles():
-    return
-     
-exitButton = tk.Button (root, text='       Exit Application     ',command=exitApplication, bg='brown', fg='white', font=('helvetica', 12, 'bold'))
-canvas1.create_window(150, 230, window=exitButton)
+def get_JSON_File():  # Prompt the user to select the file needed, open the file and get filename
+    root = tk.Tk()  # Initiate GUI file selector
+    root.withdraw()  # Hide main GUI window
+    path = askopenfilename(title="Select Synchronoss JSON File", filetypes=((
+        "JSON File", "*.json"), ("All Files", "*.*")))  # Allow user to select JSON file
 
-root.mainloop()
+    full_file_name = os.path.basename(path)  # Get file path from selected file
+    # Get just file name and extension
+    split_file = os.path.splitext(full_file_name)
+    # print(split_file)
+
+    file_name = split_file[0]  # Set filename to variable
+    file_ext = split_file[1]  # Set file extension to variable
+    # print(file_name)
+    # print(file_ext)
+
+    if file_ext == '.json':
+        file = open(path, 'r')  # Open file
+        text = file.read()  # Read contents of file
+        file.close()
+        return text, file_name, file_ext
+    else:
+        print('########################################################################')
+        print('You did not select a proper .JSON file extension')
+        print(
+            'You will need to restart program and select the file return from Synchronoss')
+        print('The program will close in 5 seconds...')
+        time.sleep(5)
+        return False, False, False
+
+
+def format_to_JSON(text):
+    # Check to make sure the specific string (u'') exists in read file
+    for m in re.finditer('u\'\'', text):
+        # print('Character u\'\''' found at: {}'.format(str(m.span())))
+        if len(m.span()) > 0:
+            orgText = text.replace('u\'\'', '""')
+            # print(orgText)
+
+    # Check to make sure the specific string (u') exists in read file
+    for n in re.finditer('u\'', orgText):
+        # print('Character u\' found at: {}'.format(str(n.span())))
+        if len(n.span()) > 0:
+            orgText = orgText.replace('u\'', '"')
+            # print(orgText)
+
+    # Check to make sure the specific string (') exists in read file
+    for o in re.finditer('\'', orgText):
+        # print('Character \' found at: {}'.format(str(o.span())))
+        if len(o.span()) > 0:
+            orgText = orgText.replace('\'', '"')
+            # print(orgText)
+    return orgText
+
+
+def write_converted_JSON():
+    return True
+
+
+# Get data from file selected by user, file name and file ext
+orgText, fname, fext = get_JSON_File()
+if orgText != False:
+    newText = format_to_JSON(orgText)  # Format data and get proper JSON format
+else:
+    print('')
+
+jsonText = json.loads(newText)
+print(jsonText.keys())
+
+print(jsonText["received"])
+print(jsonText["sender"])
+print(jsonText["body"])
+
+# print(fname)
+# print(fext)
+
+# with open('converted_data.json', 'w') as outfile:
+#     outfile.write(orgText)
