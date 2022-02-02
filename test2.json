@@ -1,0 +1,13 @@
+{   u'attributes': [   {   u'name': u'c', u'value': u'-1'},
+    {   u'name': u'd', u'value': u'1'},
+    {   u'name': u'g', u'value': u'0'},
+    {   u'name': u'h', u'value': u'0'}],
+u'body': u'I am sending this- This is a TEST and Sanitized message from Matt Beers',
+u'direction': u'in',
+u'id': u'1636841809202:2b70302874e6844eb535f6e9b5af1bc3',
+u'links': [   {   u'href': u'http://mm/mm/api/user/623cea0ac4124e08915aea8bbc3fe74f/messages/2b70302874e6844eb535f6e9b5af1bc3',
+   u'rel': u'self'}],
+u'received': u'2021-11-13T22:16:49.202Z',
+u'sender': u'+17195551212',
+u'title': u'',
+u'type': u'sms'}

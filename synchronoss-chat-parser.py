@@ -2,9 +2,6 @@ import json
 from operator import is_
 from posixpath import split
 import re
-# from tabnanny import check
-# import tkinter as tk
-# from tkinter.filedialog import askopenfilename
 import os
 from tabnanny import check
 import time
@@ -82,7 +79,7 @@ def check_args(arg):
         return arg, '', errors
 
 
-def get_JSON_File(user_arg, full_file_name):
+def get_JSON_File(user_arg):
     split_file = os.path.splitext(user_arg)
     # print(split_file)
 
@@ -154,12 +151,30 @@ def export_Converted_JSON(conv_text, file_loc):
         return True
 
 
+def scan_Dir_JSON(user_arg):
+    # print(user_arg)
+    file_list = []
+    for file in os.listdir(user_arg):
+        if file.endswith(".json"):
+            # print(os.path.join(user_arg, file))
+            name_only = os.path.basename(file)
+            file_list.append(name_only)
+    # print(file_list)
+    if file_list:
+        return file_list
+    else:
+        print('No JSON files were located in the provided directory')
+        print('Please try again...')
+        time.sleep(2)
+        sys.exit()
+
 # def write_converted_JSON():
 #     return True
 
 ###########################
 # Begin Main Body Of Code #
 ###########################
+
 
 passed_arg = get_args()
 # print('Passed arg: {}'.format(passed_arg))
@@ -176,7 +191,7 @@ else:
 
 if checked_arg == 'File':
     print('Time to load, read and process the File....')
-    orgText, fname, fext = get_JSON_File(passed_arg, location_info)
+    orgText, fname, fext = get_JSON_File(passed_arg)
     # print(orgText)
     print('File successfully loaded. Time to remove unwanted \"u\"characters and change all \' to \"')
     convertText = format_to_JSON(orgText)
@@ -189,33 +204,21 @@ if checked_arg == 'File':
     else:
         print('There was an error while creating file. Please try again...')
         time.sleep(3)
-        sys.exti()
+        sys.exit()
 elif checked_arg == 'Directory':
-    print('Time to scan entire directory provided by user')
+    print('Time to scan entire directory provided by user...')
+    foundFiles = scan_Dir_JSON(passed_arg)
+    # print(foundFiles)
+    fileDict = {}
+    for i in foundFiles:
+        orgText, fname, fext = get_JSON_File(i)
+        comb_fname = fname + fext
+        # print(comb_fname)
+        fileDict.update({'File': comb_fname})
+        fileDict.update({'OrigText': orgText})
+    print(fileDict.keys())
 else:
     print('Scanning cwd of python file')
-
-# print(checked_arg)
-# print(location_info)
-# print(errors)
-
-# # Examples to get current working directory of file
-# print("Path at terminal when executing this file")
-# print(os.getcwd() + "\n")
-
-# print("This file path, relative to os.getcwd()")
-# print(__file__ + "\n")
-
-# print("This file full path (following symlinks)")
-# full_path = os.path.realpath(__file__)
-# print(full_path + "\n")
-
-# print("This file directory and name")
-# path, filename = os.path.split(full_path)
-# print(path + ' --> ' + filename + "\n")
-
-# print("This file directory only")
-# print(os.path.dirname(full_path))
 
 # jsonText = json.loads(newText)
 # print(jsonText.keys())
@@ -223,6 +226,3 @@ else:
 # print(jsonText["received"])
 # print(jsonText["sender"])
 # print(jsonText["body"])
-
-# print(fname)
-# print(fext)
