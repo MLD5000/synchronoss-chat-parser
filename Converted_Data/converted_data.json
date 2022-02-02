@@ -1,0 +1,13 @@
+{   "attributes": [   {   "name": "c", "value": "-1"},
+                       {   "name": "d", "value": "1"},
+                       {   "name": "g", "value": "0"},
+                       {   "name": "h", "value": "0"}],
+    "body": "I am sending this- This is a TEST and Sanitized message from Matt Beers",
+    "direction": "in",
+    "id": "1636841809202:2b70302874e6844eb535f6e9b5af1bc3",
+    "links": [   {   "href": "http://mm/mm/api/user/623cea0ac4124e08915aea8bbc3fe74f/messages/2b70302874e6844eb535f6e9b5af1bc3",
+                      "rel": "self"}],
+    "received": "2021-11-13T22:16:49.202Z",
+    "sender": "+17195551212",
+    "title": "",
+    "type": "sms"}
